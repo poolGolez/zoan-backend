@@ -20,6 +20,9 @@ class Loaner() {
 	var amountLoaned: Double = 0.00
 		protected set
 
+    var status: LoanerStatus = LoanerStatus.ACTIVE
+        protected set
+
     constructor(capital: Double): this() {
         this.amountFree = capital
         this.amountLoaned = 0.00
@@ -37,5 +40,17 @@ class Loaner() {
     fun reimburse(amount: Double) {
         this.amountLoaned -= amount
         this.amountFree += amount
+    }
+
+    fun deactivate() {
+        if(this.status == LoanerStatus.ACTIVE) {
+            this.status = LoanerStatus.INACTIVE
+        }
+    }
+
+    fun activate() {
+        if(this.status == LoanerStatus.INACTIVE) {
+            this.status = LoanerStatus.ACTIVE
+        }
     }
 }
