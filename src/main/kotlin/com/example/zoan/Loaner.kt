@@ -20,6 +20,7 @@ class Loaner() {
     var amountLoaned: Double = 0.00
         protected set
 
+    @Enumerated(EnumType.STRING)
     var status: LoanerStatus = LoanerStatus.ACTIVE
         protected set
 
