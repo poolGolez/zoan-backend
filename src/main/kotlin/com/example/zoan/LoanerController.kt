@@ -21,9 +21,10 @@ class LoanerController {
         return repository.findAll()
     }
 
+    @Throws(ResponseStatusException::class)
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Long): Optional<Loaner> {
-        return repository.findById(id)
+    fun show(@PathVariable id: Long): Loaner {
+        return repository.findByIdOrNull(id) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
     @PostMapping
