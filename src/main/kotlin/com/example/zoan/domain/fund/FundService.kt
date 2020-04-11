@@ -13,9 +13,6 @@ class FundService {
     @Autowired
     lateinit var fundFactory: FundFactory
 
-    @Autowired
-    lateinit var loanerRepository: LoanerRepository
-
     fun createFund(params: CreateFundParams): Fund {
         try {
             val fund = fundFactory.buildFundFromParams(params)
