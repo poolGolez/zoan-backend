@@ -1,6 +1,5 @@
 package com.example.zoan
 
-import java.lang.Exception
 import java.util.*
 import javax.persistence.*
 
@@ -10,7 +9,7 @@ class Fund {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "funds_id_seq")
-    @SequenceGenerator(name="funds_id_seq", sequenceName = "funds_id_seq")
+    @SequenceGenerator(name = "funds_id_seq", sequenceName = "funds_id_seq")
     var id: Long? = null
         protected set
 
@@ -23,13 +22,21 @@ class Fund {
     var status: FundStatus = FundStatus.FREE
         protected set
 
-    @OneToMany(mappedBy = "fund", cascade = arrayOf(CascadeType.ALL))
+    @OneToMany(mappedBy = "fund", cascade = [CascadeType.ALL])
     var owners: MutableList<FundOwner> = mutableListOf<FundOwner>()
 
-    fun contribute(loaner: Loaner, amount: Double):FundOwner{
+    fun contribute(loaner: Loaner, amount: Double): FundOwner {
         // TODO check for similar fund owners
+        if (!loaner.canLend(amount)) {
+            // TODO custom exception
+            throw Exception("Loaner cannot lend much money")
+        }
+
         val fundOwner = FundOwner(this, loaner, amount)
         this.owners.add(fundOwner)
+
+        loaner.lend(amount)
+
         return fundOwner
     }
 

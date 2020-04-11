@@ -24,6 +24,7 @@ class Loaner() {
     var status: LoanerStatus = LoanerStatus.ACTIVE
         protected set
 
+
     constructor(capital: Double) : this() {
         this.amountFree = capital
         this.amountLoaned = 0.00
@@ -31,6 +32,10 @@ class Loaner() {
 
     constructor(name: String, capital: Double) : this(capital) {
         this.name = name
+    }
+
+    fun canLend(amount: Double): Boolean {
+        this.amountFree >= amount
     }
 
     fun lend(amount: Double) {
