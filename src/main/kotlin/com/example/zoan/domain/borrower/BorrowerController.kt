@@ -20,4 +20,11 @@ class BorrowerController {
     fun list(): MutableIterable<Borrower> {
         return repository.findAll()
     }
+
+    @GetMapping("/{id}")
+    fun show(@PathVariable id: Long): Borrower {
+        val borrower = repository.findByIdOrNull(id)
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        return borrower
+    }
 }
