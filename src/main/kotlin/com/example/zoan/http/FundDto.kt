@@ -1,5 +1,8 @@
-package com.example.zoan
+package com.example.zoan.http
 
+import com.example.zoan.Fund
+import com.example.zoan.FundOwner
+import com.example.zoan.FundStatus
 import java.util.*
 
 class FundDto(fund: Fund) {

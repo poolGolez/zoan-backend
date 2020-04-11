@@ -1,5 +1,7 @@
-package com.example.zoan
+package com.example.zoan.http
 
+import com.example.zoan.FundRepository
+import com.example.zoan.FundService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus

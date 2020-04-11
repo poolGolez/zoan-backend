@@ -1,5 +1,6 @@
 package com.example.zoan
 
+import com.example.zoan.http.CreateFundRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
