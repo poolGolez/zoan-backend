@@ -1,7 +1,6 @@
 package com.example.zoan.domain.fund
 
 import com.example.zoan.domain.loaner.LoanerRepository
-import com.example.zoan.http.CreateFundRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -29,4 +28,11 @@ class FundService {
     }
 }
 
-data class CreateFundParams(val owners: List<CreateFundRequest.CreateFundRequestOwnerFragment>)
+data class CreateFundParams(
+        val owners: List<OwnerFragment>
+) {
+    class OwnerFragment(
+            val loanerId: Long,
+            val amount: Double
+    )
+}

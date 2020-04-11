@@ -1,4 +1,4 @@
-package com.example.zoan.http
+package com.example.zoan.http.fund
 
 import com.example.zoan.domain.fund.Fund
 import com.example.zoan.domain.fund.FundOwner

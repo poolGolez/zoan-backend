@@ -1,4 +1,4 @@
-package com.example.zoan.http
+package com.example.zoan.http.loaner
 
 import com.example.zoan.domain.loaner.Loaner
 import org.springframework.stereotype.Component
