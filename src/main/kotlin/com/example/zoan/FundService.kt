@@ -16,9 +16,14 @@ class FundService {
     lateinit var loanerRepository: LoanerRepository
 
     fun createFund(params: CreateFundParams): Fund {
-        val fund = fundFactory.buildFundFromParams(params)
-        fundRepository.save(fund)
-        return fund
+        try {
+            val fund = fundFactory.buildFundFromParams(params)
+            fundRepository.save(fund)
+            return fund
+        } catch (exception: InsufficientLoanerBalanceException) {
+            throw FundCreationException(exception)
+        }
+
     }
 }
 

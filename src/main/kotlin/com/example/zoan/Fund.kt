@@ -27,8 +27,7 @@ class Fund {
 
     fun contribute(loaner: Loaner, amount: Double): FundOwner {
         if (!loaner.canLend(amount)) {
-            // TODO custom exception
-            throw Exception("Loaner cannot lend much money")
+            throw InsufficientLoanerBalanceException(loaner, amount);
         }
 
         var fundOwner = this.owners.find { fundOwner ->
