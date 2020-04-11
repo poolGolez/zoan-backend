@@ -25,10 +25,9 @@ class FundDto(fund: Fund) {
     inner class FundOwnerDto(fundOwner: FundOwner) {
         val id = fundOwner.id
 
-        private val _loaner = fundOwner.loaner
-
         val amount = fundOwner.amountAllocated
 
+        private val _loaner = fundOwner.loaner
         val loaner: Map<String, Any?>
             get() {
                 return mapOf(

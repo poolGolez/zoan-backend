@@ -1,5 +1,6 @@
 package com.example.zoan
 
+import java.lang.Exception
 import java.util.*
 import javax.persistence.*
 
@@ -14,7 +15,6 @@ class Fund {
         protected set
 
     var amount: Double = 0.00
-        protected set
 
     var dateCreated: Date = Date()
         protected set
@@ -24,7 +24,7 @@ class Fund {
         protected set
 
     @OneToMany(mappedBy = "fund")
-    var owners: MutableList<FundOwner> = mutableListOf(FundOwner())
+    var owners: MutableList<FundOwner> = mutableListOf<FundOwner>()
 
     fun contribute(loaner: Loaner, amount: Double):FundOwner{
         // TODO check for similar fund owners

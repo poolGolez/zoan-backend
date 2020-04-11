@@ -26,10 +26,10 @@ class FundOwner() {
     var amountReimbursed: Double = 0.00
         protected set
 
-    constructor(fund: Fund, loaner: Loaner, amountAllocated: Double): this() {
+    constructor(fund: Fund, loaner: Loaner, amount: Double) : this() {
         this.fund = fund
         this.loaner = loaner
-        this.amountAllocated = amountAllocated
+        this.amountAllocated = amount
     }
 
     val netLoanedAmount get() = this.amountAllocated - this.amountReimbursed
