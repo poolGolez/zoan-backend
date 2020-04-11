@@ -11,10 +11,10 @@ import org.springframework.web.server.ResponseStatusException
 class FundController {
 
     @Autowired
-    lateinit var fundFactory: FundFactory
+    lateinit var repository: FundRepository
 
     @Autowired
-    lateinit var repository: FundRepository
+    lateinit var fundService: FundService
 
     @GetMapping
     fun list(): List<FundDto> {
@@ -30,8 +30,8 @@ class FundController {
 
     @PostMapping
     fun create(@RequestBody request: CreateFundRequest): FundDto {
-        val fund = fundFactory.createFromRequest(request)
-        repository.save(fund)
+        val params = request.toCommand()
+        val fund = fundService.createFund(params)
         return FundDto(fund)
     }
 }
