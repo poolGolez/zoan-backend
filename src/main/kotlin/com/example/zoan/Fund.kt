@@ -24,7 +24,14 @@ class Fund {
         protected set
 
     @OneToMany(mappedBy = "fund")
-    var owners: MutableList<FundOwner>? = null
+    var owners: MutableList<FundOwner> = mutableListOf(FundOwner())
+
+    fun contribute(loaner: Loaner, amount: Double):FundOwner{
+        // TODO check for similar fund owners
+        val fundOwner = FundOwner(this, loaner, amount)
+        this.owners.add(fundOwner)
+        return fundOwner
+    }
 
     fun allocate() {
         // TODO: check if status is FREE

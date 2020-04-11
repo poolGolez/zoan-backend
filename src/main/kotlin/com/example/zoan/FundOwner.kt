@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "fund_owners")
-class FundOwner {
+class FundOwner() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fund_owners_id_seq")
@@ -22,8 +22,15 @@ class FundOwner {
     lateinit var loaner: Loaner
 
     var amountAllocated: Double = 0.00
-        protected set
 
     var amountReimbursed: Double = 0.00
         protected set
+
+    constructor(fund: Fund, loaner: Loaner, amountAllocated: Double): this() {
+        this.fund = fund
+        this.loaner = loaner
+        this.amountAllocated = amountAllocated
+    }
+
+    val netLoanedAmount get() = this.amountAllocated - this.amountReimbursed
 }
