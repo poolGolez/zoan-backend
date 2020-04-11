@@ -1,4 +1,6 @@
-package com.example.zoan
+package com.example.zoan.domain.fund
+
+import com.example.zoan.ZoanException
 
 class FundCreationException(
         cause: Exception,

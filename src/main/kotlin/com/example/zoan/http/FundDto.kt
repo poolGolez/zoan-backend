@@ -1,8 +1,8 @@
 package com.example.zoan.http
 
-import com.example.zoan.Fund
-import com.example.zoan.FundOwner
-import com.example.zoan.FundStatus
+import com.example.zoan.domain.fund.Fund
+import com.example.zoan.domain.fund.FundOwner
+import com.example.zoan.domain.fund.FundStatus
 import java.util.*
 
 class FundDto(fund: Fund) {

@@ -1,6 +1,6 @@
 package com.example.zoan.http
 
-import com.example.zoan.Loaner
+import com.example.zoan.domain.loaner.Loaner
 import org.springframework.stereotype.Component
 
 @Component

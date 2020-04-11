@@ -1,6 +1,6 @@
 package com.example.zoan.http
 
-import com.example.zoan.CreateFundParams
+import com.example.zoan.domain.fund.CreateFundParams
 
 data class CreateFundRequest(val owners: List<CreateFundRequestOwnerFragment>) {
 

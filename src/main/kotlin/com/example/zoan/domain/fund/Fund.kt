@@ -1,5 +1,6 @@
-package com.example.zoan
+package com.example.zoan.domain.fund
 
+import com.example.zoan.domain.loaner.Loaner
 import java.util.*
 import javax.persistence.*
 

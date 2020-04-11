@@ -1,6 +1,7 @@
 package com.example.zoan.http
 
-import com.example.zoan.*
+import com.example.zoan.domain.loaner.Loaner
+import com.example.zoan.domain.loaner.LoanerRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus

@@ -1,4 +1,4 @@
-package com.example.zoan
+package com.example.zoan.domain.loaner
 
 import javax.persistence.*
 

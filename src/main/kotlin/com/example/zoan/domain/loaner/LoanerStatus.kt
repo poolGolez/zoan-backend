@@ -1,4 +1,4 @@
-package com.example.zoan
+package com.example.zoan.domain.loaner
 
 enum class LoanerStatus {
     ACTIVE, INACTIVE
