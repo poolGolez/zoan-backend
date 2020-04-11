@@ -26,15 +26,21 @@ class Fund {
     var owners: MutableList<FundOwner> = mutableListOf<FundOwner>()
 
     fun contribute(loaner: Loaner, amount: Double): FundOwner {
-        // TODO check for similar fund owners
         if (!loaner.canLend(amount)) {
             // TODO custom exception
             throw Exception("Loaner cannot lend much money")
         }
 
-        val fundOwner = FundOwner(this, loaner, amount)
-        this.owners.add(fundOwner)
+        var fundOwner = this.owners.find { fundOwner ->
+            fundOwner.loaner == loaner
+        }
 
+        if (fundOwner == null) {
+            fundOwner = FundOwner(this, loaner, amount)
+            this.owners.add(fundOwner)
+        } else {
+            fundOwner.amountAllocated += amount
+        }
         loaner.lend(amount)
 
         return fundOwner

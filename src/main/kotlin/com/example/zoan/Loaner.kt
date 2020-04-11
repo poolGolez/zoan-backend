@@ -35,7 +35,7 @@ class Loaner() {
     }
 
     fun canLend(amount: Double): Boolean {
-        this.amountFree >= amount
+        return this.amountFree >= amount
     }
 
     fun lend(amount: Double) {
