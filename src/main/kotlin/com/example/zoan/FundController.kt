@@ -31,6 +31,7 @@ class FundController {
     @PostMapping
     fun create(@RequestBody request: CreateFundRequest): FundDto {
         val fund = fundFactory.createFromRequest(request)
+        repository.save(fund)
         return FundDto(fund)
     }
 }

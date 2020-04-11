@@ -23,7 +23,7 @@ class Fund {
     var status: FundStatus = FundStatus.FREE
         protected set
 
-    @OneToMany(mappedBy = "fund")
+    @OneToMany(mappedBy = "fund", cascade = arrayOf(CascadeType.ALL))
     var owners: MutableList<FundOwner> = mutableListOf<FundOwner>()
 
     fun contribute(loaner: Loaner, amount: Double):FundOwner{
