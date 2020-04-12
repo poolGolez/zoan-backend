@@ -55,7 +55,7 @@ class Loan() {
             throw LoanStatusActivationException(this)
         }
         if (fund == null) {
-            throw Exception("No fund has been allocated to loan")
+            throw NoFundAllocatedException(this)
         }
 
         status = LoanStatus.ACTIVE
