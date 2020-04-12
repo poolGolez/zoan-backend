@@ -50,6 +50,17 @@ class Loan() {
         fund.allocate()
     }
 
+    fun activate() {
+        if (status != LoanStatus.DRAFT) {
+            throw Exception("Loan status is not eligible for activation")
+        }
+        if (fund == null) {
+            throw Exception("No fund has been allocated to loan")
+        }
+
+        status = LoanStatus.ACTIVE
+    }
+
     enum class LoanStatus {
         DRAFT, ACTIVE, COMPLETE, CLOSED
     }

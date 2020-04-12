@@ -1,7 +1,5 @@
 package com.example.zoan.http.loan
 
-import com.example.zoan.domain.loan.CreateLoanParams
-import com.example.zoan.domain.loan.Loan
 import com.example.zoan.domain.loan.LoanRepository
 import com.example.zoan.domain.loan.LoanService
 import org.springframework.beans.factory.annotation.Autowired
@@ -36,6 +34,14 @@ class LoanController {
     fun create(@RequestBody request: CreateLoanRequest): LoanDto {
         val params = request.toCommand()
         val loan = service.createLoan(params)
+        return LoanDto(loan)
+    }
+
+    @PostMapping("/{id}/activate")
+    fun activate(@PathVariable id: Long): LoanDto {
+        val loan = repository.findByIdOrNull(id)
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        service.activateLoan(loan)
         return LoanDto(loan)
     }
 
