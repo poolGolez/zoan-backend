@@ -4,7 +4,8 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "borrowers")
-class Borrower {
+class Borrower() {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "borrowers_id_seq")
     @SequenceGenerator(name = "borrowers_id_seq", sequenceName = "borrowers_id_seq")
@@ -17,5 +18,9 @@ class Borrower {
 
     enum class BorrowerStatus {
         ACTIVE, INACTIVE
+    }
+
+    constructor(name: String) : this() {
+        this.name = name
     }
 }
