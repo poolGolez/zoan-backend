@@ -1,12 +1,11 @@
-package com.example.zoan.domain.borrower
+package com.example.zoan.http.borrower
 
+import com.example.zoan.domain.borrower.Borrower
+import com.example.zoan.domain.borrower.BorrowerRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -25,6 +24,13 @@ class BorrowerController {
     fun show(@PathVariable id: Long): Borrower {
         val borrower = repository.findByIdOrNull(id)
                 ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        return borrower
+    }
+
+    @PostMapping
+    fun create(@RequestBody request: CreateBorrowerRequest): Borrower {
+        val borrower = request.toBorrower()
+        repository.save(borrower)
         return borrower
     }
 }
