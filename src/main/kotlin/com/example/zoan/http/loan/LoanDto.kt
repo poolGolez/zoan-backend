@@ -5,6 +5,7 @@ import com.example.zoan.domain.fund.FundOwner
 import com.example.zoan.domain.loan.Loan
 
 class LoanDto(loan: Loan) {
+    val id = loan.id
     val amount = loan.amount
     val borrower = loan.borrower
     val monthlyInterest = loan.monthlyInterest
