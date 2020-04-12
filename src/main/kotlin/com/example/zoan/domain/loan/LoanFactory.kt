@@ -26,6 +26,7 @@ data class CreateLoanParams(
         var amount: Double,
         var borrowerId: Long,
         var monthlyInterest: Double,
-        var installmentCount: Int
+        var installmentCount: Int,
+        var fundId: Long?
 )
 

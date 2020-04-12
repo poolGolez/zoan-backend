@@ -6,12 +6,16 @@ data class CreateLoanRequest(
         val amount: Double,
         val borrowerId: Long,
         val monthlyInterest: Double,
-        val installmentCount: Int
+        val installmentCount: Int,
+        val fundId: Long?
 ) {
     fun toCommand(): CreateLoanParams {
-        return CreateLoanParams(amount,
+        return CreateLoanParams(
+                amount,
                 borrowerId,
                 monthlyInterest,
-                installmentCount)
+                installmentCount,
+                fundId
+        )
     }
 }
