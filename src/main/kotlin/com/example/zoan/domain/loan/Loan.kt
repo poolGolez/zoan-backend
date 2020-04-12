@@ -52,7 +52,7 @@ class Loan() {
 
     fun activate() {
         if (status != LoanStatus.DRAFT) {
-            throw Exception("Loan status is not eligible for activation")
+            throw LoanStatusActivationException(this)
         }
         if (fund == null) {
             throw Exception("No fund has been allocated to loan")
