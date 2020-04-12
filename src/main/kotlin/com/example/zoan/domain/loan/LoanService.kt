@@ -1,5 +1,6 @@
 package com.example.zoan.domain.loan
 
+import com.example.zoan.ZoanException
 import com.example.zoan.http.borrower.BorrowerNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,7 +19,7 @@ class LoanService {
             val loan = loanFactory.createLoan(params)
             loanRepository.save(loan)
             return loan
-        } catch(exception: BorrowerNotFoundException) {
+        } catch(exception: ZoanException) {
             throw LoanCreationException(exception)
         }
 

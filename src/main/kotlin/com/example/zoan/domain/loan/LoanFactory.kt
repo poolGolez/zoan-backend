@@ -1,6 +1,7 @@
 package com.example.zoan.domain.loan
 
 import com.example.zoan.domain.borrower.BorrowerRepository
+import com.example.zoan.domain.fund.FundNotFoundException
 import com.example.zoan.domain.fund.FundRepository
 import com.example.zoan.http.borrower.BorrowerNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,10 @@ class LoanFactory {
     @Autowired
     lateinit var fundRepository: FundRepository
 
+    @Throws(
+            BorrowerNotFoundException::class,
+            FundNotFoundException::class
+    )
     fun createLoan(params: CreateLoanParams): Loan {
         val borrower = borrowerRepository.findByIdOrNull(params.borrowerId)
                 ?: throw BorrowerNotFoundException(params.borrowerId)
@@ -26,7 +31,7 @@ class LoanFactory {
 
         params.fundId?.let { fundId ->
             val fund = fundRepository.findByIdOrNull(fundId)
-                    ?: throw Exception("Unknown funds")
+                    ?: throw FundNotFoundException(fundId)
             loan.allocate(fund)
         }
 
