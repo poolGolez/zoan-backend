@@ -2,6 +2,7 @@ package com.example.zoan.domain.loan
 
 import com.example.zoan.domain.borrower.BorrowerRepository
 import com.example.zoan.domain.fund.FundRepository
+import com.example.zoan.http.borrower.BorrowerNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
@@ -17,7 +18,7 @@ class LoanFactory {
 
     fun createLoan(params: CreateLoanParams): Loan {
         val borrower = borrowerRepository.findByIdOrNull(params.borrowerId)
-                ?: throw Exception("Unknown borrower")
+                ?: throw BorrowerNotFoundException(params.borrowerId)
         val loan = Loan(params.amount, borrower)
 
         loan.monthlyInterest = params.monthlyInterest
