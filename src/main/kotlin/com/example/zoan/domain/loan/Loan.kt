@@ -2,6 +2,7 @@ package com.example.zoan.domain.loan
 
 import com.example.zoan.domain.borrower.Borrower
 import com.example.zoan.domain.fund.Fund
+import com.example.zoan.domain.fund.FundStatus
 import javax.persistence.*
 
 @Entity
@@ -22,6 +23,7 @@ class Loan() {
     @OneToOne
     @JoinColumn(name = "fund_id", nullable = true)
     var fund: Fund? = null
+        protected set
 
     var monthlyInterest: Double = 0.0
 
@@ -33,6 +35,19 @@ class Loan() {
     constructor(amount: Double, borrower: Borrower) : this() {
         this.amount = amount
         this.borrower = borrower
+    }
+
+    fun allocate(fund: Fund) {
+        if (fund.status != FundStatus.FREE) {
+            throw Exception("Fund cannot be allocated (status: {$fund.status})")
+        }
+
+        if (fund.amount != this.amount) {
+            throw Exception("Fund amount must be equal to loaned amount")
+        }
+
+        this.fund = fund
+        fund.allocate()
     }
 
     enum class LoanStatus {
