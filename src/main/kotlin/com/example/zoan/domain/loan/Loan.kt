@@ -43,7 +43,7 @@ class Loan() {
         }
 
         if (fund.amount != this.amount) {
-            throw Exception("Fund amount must be equal to loaned amount")
+            throw LoanFundAmountAllocationException(fund, amount)
         }
 
         this.fund = fund
