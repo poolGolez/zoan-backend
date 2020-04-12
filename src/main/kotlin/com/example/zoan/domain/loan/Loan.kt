@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "loans")
-class Loan {
+class Loan() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loans_id_seq")
@@ -29,6 +29,11 @@ class Loan {
 
     @Enumerated(EnumType.STRING)
     var status: LoanStatus = LoanStatus.DRAFT
+
+    constructor(amount: Double, borrower: Borrower) : this() {
+        this.amount = amount
+        this.borrower = borrower
+    }
 
     enum class LoanStatus {
         DRAFT, ACTIVE, COMPLETE, CLOSED
