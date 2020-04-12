@@ -39,7 +39,7 @@ class Loan() {
 
     fun allocate(fund: Fund) {
         if (fund.status != FundStatus.FREE) {
-            throw Exception("Fund cannot be allocated (status: {$fund.status})")
+            throw LoanFundStatusAllocationException(fund)
         }
 
         if (fund.amount != this.amount) {
