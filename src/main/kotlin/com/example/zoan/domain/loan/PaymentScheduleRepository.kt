@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PaymentScheduleRepository : CrudRepository<PaymentSchedule, Long> {
     fun findByLoan(loan: Loan): List<PaymentSchedule>
+    fun findByIdAndLoan(id: Long, loan: Loan): PaymentSchedule?
 }
