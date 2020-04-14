@@ -30,4 +30,14 @@ class PaymentScheduleController {
             PaymentScheduleDto(paymentSchedule)
         }
     }
+
+    @GetMapping("/payment-schedules/{scheduleId}")
+    fun list(@PathVariable loanId: Long, @PathVariable scheduleId: Long): PaymentScheduleDto {
+        val loan = loanRepository.findByIdOrNull(loanId)
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        val paymentSchedule = paymentSchedRepository.findByIdAndLoan(scheduleId, loan)
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+
+        return PaymentScheduleDto(paymentSchedule)
+    }
 }
