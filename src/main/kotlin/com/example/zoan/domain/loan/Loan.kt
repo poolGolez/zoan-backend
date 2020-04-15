@@ -61,6 +61,10 @@ class Loan() {
         status = LoanStatus.ACTIVE
     }
 
+    fun computeInstallmentPayment(): Double {
+        return amount * (1 + monthlyInterest * (installmentCount / 2)) / installmentCount
+    }
+
     enum class LoanStatus {
         DRAFT, ACTIVE, COMPLETE, CLOSED
     }
