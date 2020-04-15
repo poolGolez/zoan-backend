@@ -1,6 +1,6 @@
 package com.example.zoan.domain.loan
 
-import java.util.*
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
@@ -18,7 +18,7 @@ class PaymentSchedule {
 
     var amount: Double = 0.00
 
-    lateinit var dateDue: Date
+    lateinit var dateDue: LocalDate
 
     @Enumerated(EnumType.STRING)
     var status = PaymentScheduleStatus.PENDING
