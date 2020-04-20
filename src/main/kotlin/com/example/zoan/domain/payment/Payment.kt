@@ -21,4 +21,7 @@ class Payment {
     lateinit var transactionDate: LocalDate
 
     var dateCreated = LocalDate.now()
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "payment")
+    val allotments = mutableListOf<PaymentAllotment>()
 }
