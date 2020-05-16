@@ -1,1 +1,1 @@
-rootProject.name = "zoan"
+rootProject.name = "zoan-api"
