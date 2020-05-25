@@ -31,6 +31,12 @@ class LoanService {
         }
     }
 
+    fun updateLoan(loan: Loan, params: UpdateLoanParams): Loan {
+        val updatedLoan = loanFactory.updateLoan(loan, params)
+        loanRepository.save(updatedLoan)
+        return updatedLoan
+    }
+
     fun activateLoan(loan: Loan): Loan {
         loan.activate()
         val paymentSchedules = paymentSchedFactory.createPaymentSchedules(loan)

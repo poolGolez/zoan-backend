@@ -38,9 +38,39 @@ class LoanFactory {
         return loan
     }
 
+    @Throws(
+            BorrowerNotFoundException::class,
+            FundNotFoundException::class
+    )
+    fun updateLoan(loan: Loan, params: UpdateLoanParams): Loan {
+        loan.amount = params.amount
+        loan.borrower = borrowerRepository.findByIdOrNull(params.borrowerId)
+                ?: throw BorrowerNotFoundException(params.borrowerId)
+        loan.installmentCount = params.installmentCount
+        loan.monthlyInterest = params.monthlyInterest
+
+        if(params.fundId !== null) {
+            val fund = fundRepository.findByIdOrNull(params.fundId!!)
+                    ?: throw FundNotFoundException(params.fundId!!)
+            loan.allocate(fund)
+        } else if(loan.fund !== null){
+            loan.deallocate()
+        }
+
+        return loan
+    }
+
 }
 
 data class CreateLoanParams(
+        var amount: Double,
+        var borrowerId: Long,
+        var monthlyInterest: Double,
+        var installmentCount: Int,
+        var fundId: Long?
+)
+
+data class UpdateLoanParams(
         var amount: Double,
         var borrowerId: Long,
         var monthlyInterest: Double,
