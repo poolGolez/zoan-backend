@@ -2,7 +2,7 @@ package com.example.zoan.domain.loan
 
 import com.example.zoan.ZoanException
 
-class LoanStatusActivationException(
+class LoanStatusUpdateException(
         val loan: Loan,
         message: String
 ) : ZoanException(message) {
@@ -14,7 +14,7 @@ class LoanStatusActivationException(
     companion object {
         fun getDefaultMessage(status: Loan.LoanStatus): String {
             return ("Loan status is not eligible for " +
-                    "activation (status: %s), should be DRAFT").format(status)
+                    "update (status: %s), should be DRAFT").format(status)
         }
     }
 }

@@ -43,6 +43,10 @@ class LoanFactory {
             FundNotFoundException::class
     )
     fun updateLoan(loan: Loan, params: UpdateLoanParams): Loan {
+        if(loan.status !== Loan.LoanStatus.DRAFT) {
+            throw LoanStatusUpdateException(loan)
+        }
+
         loan.amount = params.amount
         loan.borrower = borrowerRepository.findByIdOrNull(params.borrowerId)
                 ?: throw BorrowerNotFoundException(params.borrowerId)
