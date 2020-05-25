@@ -37,6 +37,15 @@ class LoanController {
         return LoanDto(loan)
     }
 
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long, @RequestBody request: UpdateLoanRequest): LoanDto {
+        val loan = repository.findByIdOrNull(id)
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        val params = request.toCommand()
+        service.updateLoan(loan, params)
+        return LoanDto(loan)
+    }
+
     @PostMapping("/{id}/activate")
     fun activate(@PathVariable id: Long): LoanDto {
         val loan = repository.findByIdOrNull(id)
