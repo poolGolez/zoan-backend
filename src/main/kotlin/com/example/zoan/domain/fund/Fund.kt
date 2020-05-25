@@ -50,6 +50,10 @@ class Fund {
         // TODO: check if status is FREE
         this.status = FundStatus.ALLOCATED
     }
+
+    fun deallocate() {
+        this.status = FundStatus.FREE
+    }
 }
 
 enum class FundStatus {

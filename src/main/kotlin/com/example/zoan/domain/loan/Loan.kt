@@ -1,5 +1,6 @@
 package com.example.zoan.domain.loan
 
+import com.example.zoan.ZoanException
 import com.example.zoan.domain.borrower.Borrower
 import com.example.zoan.domain.fund.Fund
 import com.example.zoan.domain.fund.FundStatus
@@ -38,6 +39,10 @@ class Loan() {
     }
 
     fun allocate(fund: Fund) {
+        if (this.fund == fund) {
+            return
+        }
+
         if (fund.status != FundStatus.FREE) {
             throw LoanFundStatusAllocationException(fund)
         }
@@ -48,6 +53,22 @@ class Loan() {
 
         this.fund = fund
         fund.allocate()
+    }
+
+    @Throws(ZoanException::class)
+    fun deallocate(): Fund {
+        if (status != LoanStatus.DRAFT) {
+            throw LoanFundStatusDeallocationException(this)
+        }
+
+        if(fund == null) {
+            throw NoFundAllocatedException(this)
+        }
+
+        val deallocatedFund = fund!!
+        this.fund = null
+        deallocatedFund.deallocate()
+        return deallocatedFund
     }
 
     fun activate() {

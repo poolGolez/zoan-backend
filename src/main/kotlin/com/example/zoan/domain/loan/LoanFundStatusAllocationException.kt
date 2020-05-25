@@ -16,7 +16,7 @@ class LoanFundStatusAllocationException(
 
     companion object {
         private fun getDefaultMessage(status: FundStatus): String {
-            return "Fund status is not fo allocation (status: %s)"
+            return "Fund status is not for allocation (status: %s)"
                     .format(status)
         }
     }
