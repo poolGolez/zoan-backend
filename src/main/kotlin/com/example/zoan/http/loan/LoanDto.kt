@@ -3,6 +3,9 @@ package com.example.zoan.http.loan
 import com.example.zoan.domain.fund.Fund
 import com.example.zoan.domain.fund.FundOwner
 import com.example.zoan.domain.loan.Loan
+import java.text.SimpleDateFormat
+
+val dateFormatter = SimpleDateFormat("MM-dd-YYYY")
 
 class LoanDto(loan: Loan) {
     val id = loan.id
@@ -10,6 +13,7 @@ class LoanDto(loan: Loan) {
     val borrower = loan.borrower
     val monthlyInterest = loan.monthlyInterest
     val installmentCount = loan.installmentCount
+    val dateCreated = dateFormatter.format(loan.dateCreated)
     val status = loan.status
 
     private val _fund = loan.fund
