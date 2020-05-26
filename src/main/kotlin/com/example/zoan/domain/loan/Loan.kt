@@ -4,6 +4,7 @@ import com.example.zoan.ZoanException
 import com.example.zoan.domain.borrower.Borrower
 import com.example.zoan.domain.fund.Fund
 import com.example.zoan.domain.fund.FundStatus
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -29,6 +30,9 @@ class Loan() {
     var monthlyInterest: Double = 0.0
 
     var installmentCount: Int = 1
+
+    var dateCreated: Date = Date()
+        protected set
 
     @Enumerated(EnumType.STRING)
     var status: LoanStatus = LoanStatus.DRAFT
