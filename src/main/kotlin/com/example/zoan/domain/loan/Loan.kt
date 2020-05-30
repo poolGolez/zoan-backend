@@ -43,6 +43,12 @@ class Loan() {
     val pendingSchedules: List<PaymentSchedule>
         get() = schedules.filter { it.status == PaymentSchedule.PaymentScheduleStatus.PENDING }
 
+    val outstandingBalance: Double
+        get() = pendingSchedules.map { it.amountPayable() }.sum()
+
+    val isComplete:Boolean
+        get() = (status == LoanStatus.COMPLETE)
+
     constructor(amount: Double, borrower: Borrower) : this() {
         this.amount = amount
         this.borrower = borrower

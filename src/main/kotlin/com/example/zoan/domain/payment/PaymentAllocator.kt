@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component
 @Component
 class PaymentAllocator {
 
+    @Throws(LoanAllocationCompleteException::class)
     fun allocatePayment(payment: Payment, loan: Loan) {
-        // check if loan is full; if amount is greater than outstanding
+        if (loan.isComplete) {
+            throw LoanAllocationCompleteException(loan)
+        }
+        // if amount is greater than outstanding; allow?
 
         var paymentAmount = payment.amount
         var paymentSchedule = nextSchedule(loan)
@@ -17,7 +21,9 @@ class PaymentAllocator {
             paymentSchedule = nextSchedule(loan)
         }
 
-        //if all schedules are covered, complete the loan
+        if (loan.outstandingBalance == 0.0) {
+            loan.status = Loan.LoanStatus.COMPLETE
+        }
     }
 
     private fun nextSchedule(loan: Loan): PaymentSchedule? {
