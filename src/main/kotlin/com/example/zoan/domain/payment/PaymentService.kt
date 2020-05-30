@@ -26,12 +26,12 @@ class PaymentService {
 
     fun createPayment(params: CreatePaymentParams): Payment {
         val payment = paymentFactory.createPayment(params)
+        paymentRepository.save(payment)
 
         val loan = loanRepository.findByIdOrNull(params.loanId)
                 ?: throw LoanNotFoundException(params.loanId)
         paymentAllocator.allocatePayment(payment, loan)
 
-        paymentRepository.save(payment)
         return payment
     }
 }

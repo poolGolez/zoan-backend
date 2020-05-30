@@ -1,6 +1,7 @@
 package com.example.zoan.domain.payment
 
 import com.example.zoan.domain.borrower.Borrower
+import com.example.zoan.domain.loan.Loan
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -22,6 +23,11 @@ class Payment {
 
     var dateCreated = LocalDate.now()
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "payment")
+    @OneToMany(mappedBy = "payment")
     val allotments = mutableListOf<PaymentAllotment>()
+
+    @ManyToOne
+    @JoinColumn(name = "loan_id")
+    val loan: Loan? = null
+
 }

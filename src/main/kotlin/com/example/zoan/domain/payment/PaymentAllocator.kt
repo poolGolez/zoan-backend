@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component
 @Component
 class PaymentAllocator {
 
+    @Autowired
+    lateinit var repository: PaymentAllotmentRepository
+
     @Throws(LoanAllocationCompleteException::class)
     fun allocatePayment(payment: Payment, loan: Loan) {
         if (loan.isComplete) {
@@ -38,6 +41,8 @@ class PaymentAllocator {
         allotment.payment = payment
         allotment.schedule = paymentSchedule
         allotment.amount = paymentAmount - excessAmount
+        repository.save(allotment)
+
         payment.allotments.add(allotment)
         return excessAmount
     }
