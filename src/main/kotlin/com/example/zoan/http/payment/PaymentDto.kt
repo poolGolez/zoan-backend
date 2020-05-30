@@ -14,6 +14,6 @@ class PaymentDto(payment: Payment) {
 
     class PaymentAllotmentDto(allotment: PaymentAllotment) {
         val schedule = PaymentScheduleDto(allotment.schedule)
-        val amount = allotment.amount
+        val amountOwed = allotment.amount
     }
 }

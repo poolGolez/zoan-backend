@@ -2,6 +2,7 @@ package com.example.zoan.domain.payment
 
 import com.example.zoan.domain.loan.Loan
 import com.example.zoan.domain.loan.PaymentSchedule
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
@@ -17,7 +18,7 @@ class PaymentAllocator {
         var paymentAmount = payment.amount
         var paymentSchedule = nextSchedule(loan)
         while (paymentAmount > 0 && paymentSchedule !== null) {
-            paymentAmount = paymentSchedule.cover(paymentAmount)
+            paymentAmount = allocateToSchedule(payment, paymentSchedule, paymentAmount)
             paymentSchedule = nextSchedule(loan)
         }
 
@@ -28,6 +29,17 @@ class PaymentAllocator {
 
     private fun nextSchedule(loan: Loan): PaymentSchedule? {
         return loan.pendingSchedules.sortedBy { it.dateDue }.firstOrNull()
+    }
+
+    private fun allocateToSchedule(payment: Payment, paymentSchedule: PaymentSchedule, paymentAmount: Double): Double {
+        val excessAmount = paymentSchedule.cover(paymentAmount)
+
+        val allotment = PaymentAllotment()
+        allotment.payment = payment
+        allotment.schedule = paymentSchedule
+        allotment.amount = paymentAmount - excessAmount
+        payment.allotments.add(allotment)
+        return excessAmount
     }
 
 }
