@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 class PaymentDto(payment: Payment) {
     val id = payment.id
     val payer = payment.payer
-    val loan = payment.loan
+    val loan = LoanFragmentDto(payment.loan)
     val amount = payment.amount
     val transactionDate = payment.transactionDate.format(DateTimeFormatter.ofPattern("MM-dd-YYYY"))
     val allotments = payment.allotments.map { PaymentAllotmentDto(it) }
@@ -25,6 +25,7 @@ class PaymentDto(payment: Payment) {
         val installmentCount = loan.installmentCount
         val monthlyInterest = loan.monthlyInterest
         val loaners = loan.fund!!.owners.map { it.loaner.name }
+        val status = loan.status
     }
 
 }

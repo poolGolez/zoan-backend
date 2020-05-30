@@ -28,6 +28,6 @@ class Payment {
 
     @ManyToOne
     @JoinColumn(name = "loan_id")
-    val loan: Loan? = null
+    lateinit var loan: Loan
 
 }

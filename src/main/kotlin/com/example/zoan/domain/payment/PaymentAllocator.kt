@@ -12,7 +12,8 @@ class PaymentAllocator {
     lateinit var repository: PaymentAllotmentRepository
 
     @Throws(LoanAllocationCompleteException::class)
-    fun allocatePayment(payment: Payment, loan: Loan) {
+    fun allocatePayment(payment: Payment) {
+        val loan = payment.loan!!
         if (loan.isComplete) {
             throw LoanAllocationCompleteException(loan)
         }
