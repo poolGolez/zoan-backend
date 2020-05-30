@@ -12,7 +12,7 @@ class PaymentScheduleFactory {
             val paymentSchedule = PaymentSchedule()
             paymentSchedule.loan = loan
             paymentSchedule.dateDue = dueDate
-            paymentSchedule.amount = loan.computeInstallmentPayment()
+            paymentSchedule.amountOwed = loan.computeInstallmentPayment()
             paymentSchedule
         }
         return paymentSchedules.toList()

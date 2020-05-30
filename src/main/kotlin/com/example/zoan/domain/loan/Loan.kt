@@ -37,6 +37,12 @@ class Loan() {
     @Enumerated(EnumType.STRING)
     var status: LoanStatus = LoanStatus.DRAFT
 
+    @OneToMany(mappedBy = "loan")
+    val schedules = mutableListOf<PaymentSchedule>()
+
+    val pendingSchedules: List<PaymentSchedule>
+        get() = schedules.filter { it.status == PaymentSchedule.PaymentScheduleStatus.PENDING }
+
     constructor(amount: Double, borrower: Borrower) : this() {
         this.amount = amount
         this.borrower = borrower
@@ -65,7 +71,7 @@ class Loan() {
             throw LoanFundStatusDeallocationException(this)
         }
 
-        if(fund == null) {
+        if (fund == null) {
             throw NoFundAllocatedException(this)
         }
 
@@ -89,6 +95,7 @@ class Loan() {
     fun computeInstallmentPayment(): Double {
         return amount * (1 + monthlyInterest * (installmentCount / 2)) / installmentCount
     }
+
 
     enum class LoanStatus {
         DRAFT, ACTIVE, COMPLETE, CLOSED

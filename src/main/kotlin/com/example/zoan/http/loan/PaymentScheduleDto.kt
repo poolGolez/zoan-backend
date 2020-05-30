@@ -4,7 +4,7 @@ import com.example.zoan.domain.loan.PaymentSchedule
 
 class PaymentScheduleDto(paymentSchedule: PaymentSchedule) {
     val id = paymentSchedule.id
-    val amount = paymentSchedule.amount
+    val amountOwed = paymentSchedule.amountOwed
     val dateDue = paymentSchedule.dateDue
     val status = paymentSchedule.status
 }
