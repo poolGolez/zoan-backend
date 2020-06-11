@@ -33,6 +33,10 @@ class Transaction {
     @Enumerated(EnumType.STRING)
     var status: TransactionStatus = TransactionStatus.PENDING
 
+    val isCredit get() = (type == TransactionType.CREDIT)
+
+    val isDebit get() = (type == TransactionType.DEBIT)
+
 }
 
 enum class TransactionStatus {
