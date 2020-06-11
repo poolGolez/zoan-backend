@@ -2,6 +2,7 @@ package com.example.zoan.domain.equity
 
 import com.example.zoan.domain.loaner.Loaner
 import java.time.LocalDate
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -21,9 +22,9 @@ class Transaction {
 
     lateinit var transactionDate: LocalDate
 
-    val dateCreated = LocalDate.now()
+    val dateCreated = Date()
 
-    var dateApplied: LocalDate? = null
+    var dateApplied: Date? = null
 
     var notes: String? = null
 
@@ -39,7 +40,7 @@ class Transaction {
 
     fun apply() {
         status = TransactionStatus.APPLIED
-        dateApplied = LocalDate.now()
+        dateApplied = Date()
     }
 }
 
