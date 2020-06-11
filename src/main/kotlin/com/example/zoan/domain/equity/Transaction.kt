@@ -23,11 +23,20 @@ class Transaction {
 
     val dateCreated = LocalDate.now()
 
+    var dateApplied: LocalDate? = null
+
     var notes: String? = null
 
     @Enumerated(EnumType.STRING)
     lateinit var type: TransactionType
 
+    @Enumerated(EnumType.STRING)
+    var status: TransactionStatus = TransactionStatus.PENDING
+
+}
+
+enum class TransactionStatus {
+    PENDING, APPLIED
 }
 
 enum class TransactionType {
