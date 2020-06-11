@@ -59,4 +59,12 @@ class Loaner() {
             this.status = LoanerStatus.ACTIVE
         }
     }
+
+    fun credit(amount: Double) {
+        this.amountFree += amount
+    }
+
+    fun debit(amount: Double) {
+        this.amountFree -= amount
+    }
 }
