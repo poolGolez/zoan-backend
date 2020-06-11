@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
-@Transactional
 @Service
+@Transactional
 class TransactionService {
 
     @Autowired
@@ -16,12 +16,14 @@ class TransactionService {
     @Autowired
     lateinit var factory: TransactionFactory
 
+    @Autowired
+    lateinit var transactionEnforcer: TransactionEnforcer
+
     fun createTransaction(loaner: Loaner, params: CreateTransactionParams): Transaction {
         val transaction = factory.buildTransaction(loaner, params)
         repository.save(transaction)
 
-        //apply to loaner
-        return transaction
+        return transactionEnforcer.applyTransaction(transaction)
     }
 }
 
