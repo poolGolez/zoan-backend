@@ -1,6 +1,7 @@
 package com.example.zoan.domain.equity
 
 import com.example.zoan.domain.loaner.Loaner
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
