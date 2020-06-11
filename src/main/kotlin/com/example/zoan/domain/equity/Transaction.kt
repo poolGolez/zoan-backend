@@ -37,6 +37,10 @@ class Transaction {
 
     val isDebit get() = (type == TransactionType.DEBIT)
 
+    fun apply() {
+        status = TransactionStatus.APPLIED
+        dateApplied = LocalDate.now()
+    }
 }
 
 enum class TransactionStatus {
