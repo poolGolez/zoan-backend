@@ -40,13 +40,13 @@ class PaymentScheduleController {
     }
 
     @GetMapping("/api/payment-schedules")
-    fun query(requestParams: PaymentScheduleRequestQuery): List<PaymentScheduleDto> {
+    fun query(requestParams: PaymentScheduleRequestQuery): List<PaymentScheduleDtoWithLoanContext> {
         val queryParams = requestParams.toQueryParams()
         val paymentSchedules =
                 paymentSchedRepository.findByDateDueBetween(queryParams.dateFrom, queryParams.dateTo)
 
         return paymentSchedules.map { paymentSchedule ->
-            PaymentScheduleDto(paymentSchedule)
+            PaymentScheduleDtoWithLoanContext(paymentSchedule)
         }
     }
 }
