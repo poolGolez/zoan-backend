@@ -7,9 +7,14 @@ import java.time.format.DateTimeFormatter
 @Component
 class DateFormatter {
     companion object {
+        val formatter = DateTimeFormatter.ofPattern("M-d-yyyy")
+
         fun format(date: LocalDate): String? {
-            val formatter = DateTimeFormatter.ofPattern("MM-dd-YYYY")
             return formatter.format(date)
+        }
+
+        fun parse(dateString: String): LocalDate {
+            return LocalDate.parse(dateString, formatter)
         }
     }
 }
